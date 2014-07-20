@@ -9,8 +9,18 @@
 <% end %>
 
 
-<% if @actors  %>
+<% if @rt_actors  %>
   <%= "The cast of #{@movie.titleize}:"%>
+  <img src="<%= @movie_poster_image %>" style="display: block;">
+  <ul>
+    <% @rt_actors.each do |actor| %>
+      <li><%= actor.html_safe %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% if @actors  %>
+  <%= "The cast of #{@movie.titleize}: FROM FREEBASE"%>
   <img src="<%= @movie_poster_image %>" style="display: block;">
   <ul>
     <% @actors.each do |actor| %>
