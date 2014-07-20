@@ -2,13 +2,18 @@ class FreebaseApi
 
 FREEBASE_URL = Addressable::URI.parse('https://www.googleapis.com/freebase/v1/mqlread')
 
-  def self.freebase_magic(query)
-    FREEBASE_URL.query_values = {
-        'query' => query.to_json,
-        'key'=> ENV['FREEBASE_KEY']
-      }
+  def self.get_actor_movies(actor="Brad Pitt")
+    query = [
+          {
+            "starring" => [ { "actor" => actor } ],
+            "name" => [],
+            "type" => "/film/film"
+          }
+        ]
 
-    HTTParty.get(FREEBASE_URL, :format => :json)
+    response = query_freebase(query)
+    movies = response['result'].collect { |movie| movie['name'] }
+    movies.flatten
   end
 
   def self.get_actor_details(actor="Brad Pitt")
@@ -21,24 +26,10 @@ FREEBASE_URL = Addressable::URI.parse('https://www.googleapis.com/freebase/v1/mq
       }
     ]
 
-    response = freebase_magic(query)
+    response = query_freebase(query)
   end
 
-  def self.show_movies(actor="Brad Pitt")
-    query = [
-          {
-            "starring" => [ { "actor" => actor } ],
-            "name" => [],
-            "type" => "/film/film"
-          }
-        ]
-
-    response = freebase_magic(query)
-    # movies = response['result'].collect { |movie| movie['name'] }
-    # movies.flatten
-  end
-
-  def self.show_actors(movie="Ocean's Eleven")
+  def self.get_movie_cast(movie="Ocean's Eleven")
     query = [
           {
             "starring" => [ {"actor" => [] } ],
@@ -52,19 +43,20 @@ FREEBASE_URL = Addressable::URI.parse('https://www.googleapis.com/freebase/v1/mq
           }
         ]
 
-      response = freebase_magic(query)
-      # actors = response['result'][0]['starring'].collect { |name| name['actor'] }
-      # actors.flatten
+      response = query_freebase(query)
+      actors = response['result'][0]['starring'].collect { |name| name['actor'] }
+      actors.flatten
   end
 
-  def self.check_actor_answer(actor="Brad Pitt", movie="Fight Club")
-    movies = show_movies(actor)
-    movies.include?(movie)
-  end
+  private
 
-  def self.check_movie_answer(movie="Fight Club", actor="Brad Pitt")
-    actors = show_actors(movie)
-    actors.include?(actor)
+  def self.query_freebase(query)
+    FREEBASE_URL.query_values = {
+        'query' => query.to_json,
+        'key'=> ENV['FREEBASE_KEY']
+      }
+
+    HTTParty.get(FREEBASE_URL, :format => :json)
   end
 
 end
