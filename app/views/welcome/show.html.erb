@@ -1,5 +1,6 @@
 <% if @movies  %>
   <%= "Movies that #{@actor.titleize} has performed in:" %>
+  <img src="<%= @actor_image %>" style="display: block;">
   <ul>
     <% @movies.each do |movie| %>
       <li><%= movie.html_safe %></li>

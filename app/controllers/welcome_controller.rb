@@ -5,6 +5,7 @@ class WelcomeController < ApplicationController
 
   def show
     if params[:actor]
+      @actor_image = ActorImageScraper.scrape_actor_image(params[:actor])
       @actor = params[:actor]
       @movies = FreebaseApi.get_actor_movies(params[:actor])
     else
