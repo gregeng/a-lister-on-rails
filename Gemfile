@@ -12,7 +12,9 @@ gem "simple_form"
 gem "uglifier"
 gem 'httparty', '0.12.0'
 gem "addressable"
+gem "nokogiri"
 gem "unicorn"
+
 
 
 group :development do

@@ -8,6 +8,7 @@ require "action_mailer/railtie"
 require "action_view/railtie"
 require "sprockets/railtie"
 require "addressable/uri" # required to allow the FreebaseApi to consume the return values
+require 'open-uri' # required to allow Nokogiri to scrape web data.
 
 # require "rails/test_unit/railtie"
 
