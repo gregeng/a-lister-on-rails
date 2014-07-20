@@ -11,6 +11,8 @@ gem "sass-rails", "~> 4.0.3"
 gem "simple_form"
 gem "uglifier"
 gem 'httparty', '0.12.0'
+gem "unicorn"
+
 
 group :development do
   gem "spring"
