@@ -1,0 +1,18 @@
+<% if @movies  %>
+  <%= "Movies that #{@actor.titleize} has performed in:" %>
+  <ul>
+    <% @movies.each do |movie| %>
+      <li><%= movie.html_safe %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+
+<% if @actors  %>
+  <%= "The cast of #{@movie.titleize}:"%>
+  <ul>
+    <% @actors.each do |actor| %>
+      <li><%= actor.html_safe %></li>
+    <% end %>
+  </ul>
+<% end %>
