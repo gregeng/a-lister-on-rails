@@ -2,6 +2,8 @@ class FreebaseApi
 
 FREEBASE_URL = Addressable::URI.parse('https://www.googleapis.com/freebase/v1/mqlread')
 
+#TODO Refactor all the query methods out.
+
   def self.get_actor_movies(actor="Brad Pitt")
     query = [
           {
@@ -46,6 +48,24 @@ FREEBASE_URL = Addressable::URI.parse('https://www.googleapis.com/freebase/v1/mq
       response = query_freebase(query)
       actors = response['result'][0]['starring'].collect { |name| name['actor'] }
       actors.flatten
+  end
+
+  def self.get_movie_thumbnail(movie="Ocean's Eleven")
+    query = [
+          {
+            "starring" => [ {"actor" => [] } ],
+            "name" => movie,
+            "netflix_id" => [],
+            "type" => "/film/film",
+            "imdb_id" => [],
+            "netflix_id" => [],
+            "rottentomatoes_id" => [],
+            "trailers" => []
+          }
+        ]
+
+      response = query_freebase(query)
+      response['result'][0]['imdb_id'][0]
   end
 
   private

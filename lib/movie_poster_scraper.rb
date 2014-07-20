@@ -1,0 +1,34 @@
+class MoviePosterScraper
+
+  IMDB_BASE_MOVIE_LINK = "http://www.imdb.com/title/"
+
+  def self.scrape_movie_poster(imdb_id)
+    url = build_imdb_url(imdb_id)
+    site_data = open_movie_page(url)
+    scrape_poster(site_data)
+  end
+
+  private
+
+  def self.build_imdb_url(imdb_id)
+    IMDB_BASE_MOVIE_LINK + imdb_id
+  end
+
+  def self.open_movie_page(url)
+    begin
+      site_data = Nokogiri::HTML(open(url))
+    rescue
+      puts "Movie not found on IMDB"
+    end
+  end
+
+  def self.scrape_poster(site_data)
+    begin
+      site_data.css("div.image img").attr('src').value
+    rescue
+      # Set to a default picture, maybe the 2 actors mask
+      "https://dtvimages.hs.llnwd.net/e1//db_photos/default/Movies/movies_d.jpg"
+    end
+  end
+
+end
