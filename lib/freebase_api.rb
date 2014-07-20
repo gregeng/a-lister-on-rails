@@ -29,6 +29,7 @@ FREEBASE_URL = Addressable::URI.parse('https://www.googleapis.com/freebase/v1/mq
     ]
 
     response = query_freebase(query)
+    response['result'][0]['imdb_entry']
   end
 
   def self.get_movie_cast(movie="Ocean's Eleven")
