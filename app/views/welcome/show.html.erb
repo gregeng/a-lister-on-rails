@@ -11,6 +11,7 @@
 
 <% if @actors  %>
   <%= "The cast of #{@movie.titleize}:"%>
+  <img src="<%= @movie_poster_image %>" style="display: block; height: 200px; width=auto;">
   <ul>
     <% @actors.each do |actor| %>
       <li><%= actor.html_safe %></li>

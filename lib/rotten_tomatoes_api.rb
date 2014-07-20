@@ -1,6 +1,6 @@
 class RottenTomatoesApi
   def self.search(search_string)
-    search_results = HTTParty.get("http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=#{ENV['ROTTEN_TOMATOES_KEY']}&q=#{URI.escape(search_string)}&page_limit=3", :format => :json)
+    search_results = HTTParty.get("http://api.rottentomatoes.com/api/public/v1.0/movies.json?apikey=#{ENV['ROTTEN_TOMATOES_KEY']}&q=#{URI.escape(search_string)}&page_limit=1", :format => :json)
     if search_results.has_key?("movies")
       search_results
     end
