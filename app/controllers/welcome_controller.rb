@@ -10,8 +10,6 @@ class WelcomeController < ApplicationController
       actor_name = params[:actor]
       actor_imdb_id = FreebaseApi.get_actor_details(actor_name)
 
-      binding.pry
-
       @actor_image = ImdbActorImageScraper.scrape_actor_image(actor_imdb_id)
       @actor = actor_name
       @movies = FreebaseApi.get_actor_movies(actor_name)
