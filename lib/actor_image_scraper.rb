@@ -12,7 +12,7 @@ class ActorImageScraper
   private
 
   def self.sanitize_actor_name(actor_name)
-    actor_name.downcase.strip.gsub(" ","_").gsub(".","")
+    actor_name.downcase.strip.gsub(" ","_").gsub(".","").gsub("-", "_").gsub(",", "")
   end
 
   def self.build_actor_url(sanitized_actor_name)
