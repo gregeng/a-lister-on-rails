@@ -1,5 +1,7 @@
-<%= form_for() do |form| %>
+<%= form_for(:game_session, url: game_session_path) do |form| %>
   <div>
-    <%= form.submit "Start New Game!" %>
+    <%= form.label :starting_actor %>
+    <%= form.text_field :starting_actor %>
   </div>
+  <%= form.submit "Start New Game!" %>
 <% end %>

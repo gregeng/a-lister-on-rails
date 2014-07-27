@@ -3,10 +3,11 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'welcome#index'
-  resource :session, only: [:new, :create, :destroy]
+  root 'game_sessions#new'
+  resource :game_session, only: [:new, :create, :destroy]
 
-  get '/welcome' => 'welcome#show'
+  get '/welcome' => 'welcome#index'
+
 
 
 
