@@ -11,12 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140727001744) do
+ActiveRecord::Schema.define(version: 20140727005732) do
 
   create_table "games", force: true do |t|
     t.string   "starting_actor"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "rounds", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "game_id"
+  end
+
+  add_index "rounds", ["game_id"], name: "index_rounds_on_game_id"
 
 end
